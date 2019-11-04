@@ -22,9 +22,13 @@ class VideoScreen extends React.Component {
 	}
 
 	render() {
+		const { videoData } = this.props;
+		console.log('video screen props', videoData);
+
 		return (
 			<View>
-				<Text>Video Screen</Text>
+				<Text>Video Screen {this.props.videoData}</Text>
+				<Text>{this.props.videoData}</Text>
 			</View>
 		)
 	}
