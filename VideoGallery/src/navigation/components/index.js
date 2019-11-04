@@ -1,5 +1,5 @@
 import React from 'react';
-import { Actions, Scene } from 'react-native-router-flux';
+import { Actions, Scene, Stack } from 'react-native-router-flux';
 import { HOME_SCREEN, VIDEO_SCREEN } from '../screen_names';
 import HomeScreen from '../../features/home/components';
 import VideoScreen from '../../features/video_screen';
@@ -19,6 +19,7 @@ const AppNavigator = Actions.create(
 			key={VIDEO_SCREEN}
 			wrap={false}
 			component={VideoScreen}
+			back={true}
 		/>
 	</Scene >
 );

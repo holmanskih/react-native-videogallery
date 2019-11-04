@@ -11,17 +11,13 @@ import { Actions } from 'react-native-router-flux';
 class HomeScreen extends React.Component {
 	static navigationOptions = {
 		title: HOME_SCREEN,
-		headerTintColor: HEADER_TINT_COLOR,
-		headerStyle: {
-			backgroundColor: HEADER_BACKGROUND_COLOR,
-		},
 	};
 
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			shortVideoListApiData: [],
+			videoListApiData: [],
 		};
 	};
 
@@ -34,22 +30,26 @@ class HomeScreen extends React.Component {
 			headers: { "Authorization": PRIVATE_ACCESS_KEY }
 		});
 
-		this.setState({ shortVideoListApiData: response.data.videos });
+		this.setState({ videoListApiData: response.data.videos });
+		console.log(this.state.videoListApiData[0])
 	};
 
 	render() {
 		return (
-			<View>
+			<View style={{backgroundColor: '#fff'}}>
 				<FlatList
 					numColumns={1}
-					data={this.state.shortVideoListApiData}
+					data={this.state.videoListApiData}
 					keyExtractor={(item, index) => index}
 					renderItem={({ item }) => (
 						<TouchableOpacity
 							activeOpacity={0.5}
 							style={homeScreenStyles.touchableVideoWrapper}
 							onPress={() => {
-								Actions.VideoScreen({videoData: 'videoData'});
+								Actions.VideoScreen({
+									username: item.user.name,
+									videoUrl: item.video_files[3].link
+								});
 							}}
 						>
 							<View style={{ marginBottom: 20 }}>
@@ -72,7 +72,7 @@ class HomeScreen extends React.Component {
 											homeScreenStyles.videoDescription,
 											homeScreenStyles.durationDescription
 										]}>
-											{item.duration} min
+											{item.duration} sec
 											</Text>
 									</View>
 								</View>
